@@ -6,11 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tabla_mareas/core/errors/failures.dart';
-import 'package:tabla_mareas/domain/repositories/random_number_repository.dart';
-import 'package:tabla_mareas/data/repositories_impl/random_number_repository_impl.dart';
-import 'package:tabla_mareas/data/datasources/random_number_remote_data_source.dart';
-import 'package:tabla_mareas/domain/usecases/get_random_number_usecase.dart';
-import 'package:tabla_mareas/presentation/viewmodels/random_number_viewmodel.dart';
+
 import 'package:tabla_mareas/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:tabla_mareas/domain/repositories/tide_repository.dart';
 import 'package:tabla_mareas/data/datasources/tide_remote_data_source.dart';
@@ -42,7 +38,7 @@ Future<void> init(AppConfig appConfig) async {
   // Features - Random Number
 
   // ViewModels
-  sl.registerFactory(() => RandomNumberViewModel(sl()));
+
   sl.registerFactory(() => HomeViewModel(getTidesUseCase: sl()));
   sl.registerLazySingleton(
     () => AuthViewModel(
@@ -56,7 +52,7 @@ Future<void> init(AppConfig appConfig) async {
   sl.registerLazySingleton(() => ThemeViewModel());
 
   // Use cases
-  sl.registerLazySingleton(() => GetRandomNumberUseCase(sl()));
+
   sl.registerLazySingleton(() => GetTidesUseCase(sl()));
   sl.registerLazySingleton(() => SignInUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl()));
@@ -65,9 +61,7 @@ Future<void> init(AppConfig appConfig) async {
   sl.registerLazySingleton(() => GetAuthStateUseCase(sl()));
 
   // Data sources
-  sl.registerLazySingleton<RandomNumberRemoteDataSource>(
-    () => RandomNumberRemoteDataSourceImpl(),
-  );
+
   sl.registerLazySingleton<TideRemoteDataSource>(
     () => TideRemoteDataSourceImpl(dio: sl()),
   );
@@ -79,9 +73,7 @@ Future<void> init(AppConfig appConfig) async {
   );
 
   // Repository
-  sl.registerLazySingleton<RandomNumberRepository>(
-    () => RandomNumberRepositoryImpl(remoteDataSource: sl()),
-  );
+
   sl.registerLazySingleton<TideRepository>(
     () => TideRepositoryImpl(remoteDataSource: sl()),
   );

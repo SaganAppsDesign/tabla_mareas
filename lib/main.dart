@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tabla_mareas/core/di/injection_container.dart' as di;
 import 'package:tabla_mareas/core/navigation/app_router.dart';
 import 'package:tabla_mareas/core/config/app_config.dart';
-import 'package:tabla_mareas/presentation/viewmodels/random_number_viewmodel.dart';
+
 import 'package:tabla_mareas/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:tabla_mareas/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:tabla_mareas/core/constants/app_constants.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => di.sl<RandomNumberViewModel>()),
+
         ChangeNotifierProvider(create: (_) => di.sl<ThemeViewModel>()),
         ChangeNotifierProvider(create: (_) => di.sl<AuthViewModel>()),
       ],
