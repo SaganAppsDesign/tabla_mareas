@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/tide_event.dart';
 
 class TideCardWidget extends StatelessWidget {
-  final TideEvent tideEvent;
-
   const TideCardWidget({super.key, required this.tideEvent});
+
+  final TideEvent tideEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class TideCardWidget extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
     final backgroundColor = isHighTide 
-        ? Colors.blue.shade100.withOpacity(isDarkMode ? 0.2 : 0.5) 
-        : Colors.orange.shade100.withOpacity(isDarkMode ? 0.2 : 0.5);
+        ? Colors.blue.shade100!.withValues(alpha: isDarkMode ? 0.2 : 0.5) 
+        : Colors.orange.shade100!.withValues(alpha: isDarkMode ? 0.2 : 0.5);
     final iconColor = isHighTide 
         ? (isDarkMode ? Colors.blue.shade300 : Colors.blue.shade700) 
         : (isDarkMode ? Colors.orange.shade300 : Colors.orange.shade700);
@@ -28,15 +28,15 @@ class TideCardWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: iconColor.withOpacity(0.3)),
+        border: Border.all(color: iconColor.withValues(alpha: 0.3)),
       ),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: iconColor, size: 28),
@@ -73,7 +73,7 @@ class TideCardWidget extends StatelessWidget {
                 'Altura',
                 style: TextStyle(
                   fontSize: 12,
-                  color: colorScheme.onSurface.withOpacity(0.6),
+                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 4),

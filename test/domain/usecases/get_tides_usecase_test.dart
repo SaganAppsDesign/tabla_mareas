@@ -23,10 +23,10 @@ void main() {
     useCase = GetTidesUseCase(mockRepository);
   });
 
-  final tLocation = const Location(id: '1', name: 'Test', latitude: 0.0, longitude: 0.0);
+  final tLocation = const Location(id: '1', name: 'Test', latitude: 0, longitude: 0);
   final tDate = DateTime.now();
   final tTides = [
-    TideEvent(time: tDate, height: 1.0, type: TideType.high)
+    TideEvent(time: tDate, height: 1, type: TideType.high)
   ];
 
   test('debe retornar lista de mareas del repositorio', () async {

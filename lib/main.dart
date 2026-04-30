@@ -11,15 +11,18 @@ import 'package:tabla_mareas/core/config/app_theme.dart';
 import 'package:tabla_mareas/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:tabla_mareas/firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appConfig = AppConfig.fromEnvironment();
 
-  // Firebase is disabled for now in the template to allow it to run without configuration.
-  /*
   if (appConfig.enableFirebase) {
     try {
-      await Firebase.initializeApp().timeout(
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      ).timeout(
         const Duration(seconds: AppConstants.firebaseTimeoutSeconds),
       );
     } catch (e) {
@@ -27,7 +30,6 @@ void main() async {
           'Error details: ${e.toString()}');
     }
   }
-  */
 
   try {
     await di.init(appConfig);

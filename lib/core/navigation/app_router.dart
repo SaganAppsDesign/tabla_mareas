@@ -46,9 +46,6 @@ class AppRouter {
       // Public routes that don't require authentication
       final isLoginRoute = state.matchedLocation == RoutePaths.login;
       final isRegisterRoute = state.matchedLocation == RoutePaths.register;
-      final isForgotPasswordRoute = state.matchedLocation == '/login/forgot-password';
-      
-      final isPublicRoute = isLoginRoute || isRegisterRoute || isForgotPasswordRoute;
 
       // if (!isAuthenticated && !isPublicRoute) {
       //   return RoutePaths.login;

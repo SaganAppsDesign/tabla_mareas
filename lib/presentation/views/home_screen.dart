@@ -52,7 +52,7 @@ class _HomeScreenContent extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 600),
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -76,7 +76,7 @@ class _HomeScreenContent extends StatelessWidget {
         return SearchBar(
           controller: controller,
           padding: const WidgetStatePropertyAll<EdgeInsets>(
-            EdgeInsets.symmetric(horizontal: 16.0),
+            EdgeInsets.symmetric(horizontal: 16),
           ),
           onTap: () => controller.openView(),
           onChanged: (_) => controller.openView(),
@@ -138,7 +138,7 @@ class _HomeScreenContent extends StatelessWidget {
       itemBuilder: (context, index) {
         final tide = viewModel.tides[index];
         return Padding(
-          padding: const EdgeInsets.only(bottom: 12.0),
+          padding: const EdgeInsets.only(bottom: 12),
           child: TideCardWidget(tideEvent: tide),
         );
       },

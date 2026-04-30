@@ -24,10 +24,10 @@ void main() {
     repository = TideRepositoryImpl(remoteDataSource: mockRemoteDataSource);
   });
 
-  final tLocation = const Location(id: '1', name: 'Test', latitude: 0.0, longitude: 0.0);
+  final tLocation = const Location(id: '1', name: 'Test', latitude: 0, longitude: 0);
   final tDate = DateTime.now();
   final tTideModels = [
-    TideEventModel(time: tDate, height: 1.0, type: TideType.high)
+    TideEventModel(time: tDate, height: 1, type: TideType.high)
   ];
   final List<TideEvent> tTides = tTideModels;
 

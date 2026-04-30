@@ -75,3 +75,39 @@
 .env
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Análisis, Logs y archivos temporales
+*.txt
+*.log
+analysis.txt
+analysis_full.txt
+analyze_output.txt
+final_analysis.txt
+blueprint.md
+
+# Herramientas de IA y Agentes
+.agents/
+.claude/
+.gemini/
+skills-lock.json
+
+# Node / NPM / Web build extras
+node_modules/
+package-lock.json
+package.json
+
+# Scripts de prueba locales y archivos de scratch
+test_api.dart
+test_dt.dart
+
+# Build logs y archivos de sistema
+.buildlog/
+.history
+.DS_Store
+Thumbs.db

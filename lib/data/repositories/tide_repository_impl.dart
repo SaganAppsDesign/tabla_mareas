@@ -6,9 +6,9 @@ import '../../domain/repositories/tide_repository.dart';
 import '../datasources/tide_remote_data_source.dart';
 
 class TideRepositoryImpl implements TideRepository {
-  final TideRemoteDataSource remoteDataSource;
-
   TideRepositoryImpl({required this.remoteDataSource});
+
+  final TideRemoteDataSource remoteDataSource;
 
   @override
   Future<Either<Failure, List<TideEvent>>> getTides(Location location, DateTime date) async {

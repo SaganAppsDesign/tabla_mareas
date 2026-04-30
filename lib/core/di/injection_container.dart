@@ -65,11 +65,8 @@ Future<void> init(AppConfig appConfig) async {
   sl.registerLazySingleton<TideRemoteDataSource>(
     () => TideRemoteDataSourceImpl(dio: sl()),
   );
-  // sl.registerLazySingleton<FirestoreRemoteDataSource>(
-  //   () => FirestoreRemoteDataSourceImpl(sl()),
-  // );
   sl.registerLazySingleton<FirestoreRemoteDataSource>(
-    () => MockFirestoreRemoteDataSource(),
+    () => FirestoreRemoteDataSourceImpl(sl()),
   );
 
   // Repository
@@ -80,8 +77,7 @@ Future<void> init(AppConfig appConfig) async {
   sl.registerLazySingleton<FirestoreRepository>(
     () => FirestoreRepositoryImpl(sl()),
   );
-  // sl.registerLazySingleton<AuthRepository>(() => FirebaseAuthService(sl()));
-  sl.registerLazySingleton<AuthRepository>(() => MockAuthService());
+  sl.registerLazySingleton<AuthRepository>(() => FirebaseAuthService(sl()));
 
   // Core
   sl.registerLazySingleton<SecurityService>(
@@ -91,8 +87,6 @@ Future<void> init(AppConfig appConfig) async {
 
   // External
   sl.registerLazySingleton(() => Dio());
-  // Firebase instances are commented out because initialization is disabled in main.dart
-  /*
   sl.registerLazySingleton(() {
     if (Firebase.apps.isEmpty) {
       throw Exception(
@@ -112,7 +106,6 @@ Future<void> init(AppConfig appConfig) async {
     }
     return FirebaseAuth.instance;
   });
-  */
 
   // App Config
   sl.registerLazySingleton(() => appConfig);
