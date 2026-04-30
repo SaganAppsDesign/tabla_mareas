@@ -41,8 +41,9 @@ class TideRemoteDataSourceImpl implements TideRemoteDataSource {
 
         return extremes.map((dynamic item) {
           final Map<String, dynamic> json = item as Map<String, dynamic>;
+          final String dtStr = json['datetime'] as String;
           return TideEventModel(
-            time: DateTime.parse(json['datetime']),
+            time: DateTime.parse(dtStr.substring(0, 19)),
             height: (json['height_m'] as num).toDouble(),
             type: json['type'] == 'high' ? TideType.high : TideType.low,
           );

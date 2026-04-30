@@ -14,8 +14,12 @@ class HomeScreen extends StatelessWidget {
       create: (_) {
         final viewModel = sl<HomeViewModel>();
         if (viewModel.availableLocations.isNotEmpty) {
+          final defaultLoc = viewModel.availableLocations.firstWhere(
+            (loc) => loc.id == 'cadiz',
+            orElse: () => viewModel.availableLocations.first,
+          );
           // Future.microtask prevents state update during build
-          Future.microtask(() => viewModel.selectLocation(viewModel.availableLocations.first));
+          Future.microtask(() => viewModel.selectLocation(defaultLoc));
         }
         return viewModel;
       },
@@ -44,17 +48,22 @@ class _HomeScreenContent extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildLocationSelector(context, viewModel),
-              const SizedBox(height: 24),
-              Expanded(
-                child: _buildBody(viewModel),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildLocationSelector(context, viewModel),
+                  const SizedBox(height: 24),
+                  Expanded(
+                    child: _buildBody(viewModel),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

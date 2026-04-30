@@ -50,9 +50,9 @@ class AppRouter {
       
       final isPublicRoute = isLoginRoute || isRegisterRoute || isForgotPasswordRoute;
 
-      if (!isAuthenticated && !isPublicRoute) {
-        return RoutePaths.login;
-      }
+      // if (!isAuthenticated && !isPublicRoute) {
+      //   return RoutePaths.login;
+      // }
       
       if (isAuthenticated && (isLoginRoute || isRegisterRoute)) {
         return RoutePaths.home;
