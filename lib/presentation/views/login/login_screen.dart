@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tabla_mareas/core/constants/app_constants.dart';
 import 'package:tabla_mareas/core/constants/route_names.dart';
 import 'package:tabla_mareas/l10n/app_localizations.dart';
-import 'package:tabla_mareas/presentation/viewmodel/auth_viewmodel.dart';
-import 'package:tabla_mareas/presentation/viewmodel/theme_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/auth_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:tabla_mareas/presentation/widgets/primary_button.dart';
 import 'package:go_router/go_router.dart';
 
@@ -243,6 +243,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: AppConstants.spacingL),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    context.read<AuthViewModel>().signInAsGuest();
+                  },
+                  child: Text(
+                    l10n.guestLoginAction,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

@@ -124,4 +124,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nameRequiredError => 'Please enter your name';
+
+  @override
+  String get guestLoginAction => 'Continue as Guest';
 }

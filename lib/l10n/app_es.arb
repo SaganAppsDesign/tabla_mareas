@@ -36,5 +36,6 @@
   "sendResetLinkButton": "Enviar enlace",
   "fullNameLabel": "Nombre Completo",
   "alreadyHaveAccount": "¿Ya tienes cuenta?",
-  "nameRequiredError": "Por favor, ingresa tu nombre"
+  "nameRequiredError": "Por favor, ingresa tu nombre",
+  "guestLoginAction": "Entrar como Invitado"
 }

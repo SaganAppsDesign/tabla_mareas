@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:tabla_mareas/core/constants/route_names.dart';
 import 'package:tabla_mareas/l10n/app_localizations.dart';
 import 'package:tabla_mareas/presentation/views/home_screen.dart';
-import 'package:tabla_mareas/presentation/view/login/login_screen.dart';
-import 'package:tabla_mareas/presentation/view/register/register_screen.dart';
-import 'package:tabla_mareas/presentation/view/login/forgot_password_screen.dart';
-import 'package:tabla_mareas/presentation/viewmodel/auth_viewmodel.dart';
+import 'package:tabla_mareas/presentation/views/login/login_screen.dart';
+import 'package:tabla_mareas/presentation/views/register/register_screen.dart';
+import 'package:tabla_mareas/presentation/views/login/forgot_password_screen.dart';
+import 'package:tabla_mareas/presentation/viewmodels/auth_viewmodel.dart';
 
 import 'package:tabla_mareas/core/di/injection_container.dart';
 

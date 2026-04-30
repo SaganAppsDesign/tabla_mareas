@@ -11,10 +11,14 @@ class TideCardWidget extends StatelessWidget {
     final isHighTide = tideEvent.type == TideType.high;
     final colorScheme = Theme.of(context).colorScheme;
     
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     final backgroundColor = isHighTide 
-        ? Colors.blue.shade100.withOpacity(0.5) 
-        : Colors.orange.shade100.withOpacity(0.5);
-    final iconColor = isHighTide ? Colors.blue.shade700 : Colors.orange.shade700;
+        ? Colors.blue.shade100.withOpacity(isDarkMode ? 0.2 : 0.5) 
+        : Colors.orange.shade100.withOpacity(isDarkMode ? 0.2 : 0.5);
+    final iconColor = isHighTide 
+        ? (isDarkMode ? Colors.blue.shade300 : Colors.blue.shade700) 
+        : (isDarkMode ? Colors.orange.shade300 : Colors.orange.shade700);
     final icon = isHighTide ? Icons.arrow_upward : Icons.arrow_downward;
     final title = isHighTide ? 'Pleamar' : 'Bajamar';
 

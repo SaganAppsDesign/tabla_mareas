@@ -325,6 +325,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your name'**
   String get nameRequiredError;
+
+  /// No description provided for @guestLoginAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as Guest'**
+  String get guestLoginAction;
 }
 
 class _AppLocalizationsDelegate

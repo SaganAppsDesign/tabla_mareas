@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tabla_mareas/presentation/viewmodel/auth_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:tabla_mareas/core/constants/app_constants.dart';
-import 'package:tabla_mareas/presentation/viewmodel/random_number_viewmodel.dart';
-import 'package:tabla_mareas/presentation/viewmodel/theme_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/random_number_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:tabla_mareas/l10n/app_localizations.dart';
 import 'package:tabla_mareas/presentation/widgets/primary_button.dart';
 

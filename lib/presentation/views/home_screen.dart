@@ -62,33 +62,38 @@ class _HomeScreenContent extends StatelessWidget {
   }
 
   Widget _buildLocationSelector(BuildContext context, HomeViewModel viewModel) {
-    final colorScheme = Theme.of(context).colorScheme;
-    
-    return Container(
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colorScheme.outlineVariant),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<Location>(
-          value: viewModel.selectedLocation,
-          isExpanded: true,
-          icon: Icon(Icons.expand_more, color: colorScheme.primary),
-          items: viewModel.availableLocations.map((Location loc) {
-            return DropdownMenuItem<Location>(
-              value: loc,
-              child: Text(loc.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            );
-          }).toList(),
-          onChanged: (Location? newValue) {
-            if (newValue != null) {
-              viewModel.selectLocation(newValue);
-            }
-          },
-        ),
-      ),
+    return SearchAnchor(
+      builder: (BuildContext context, SearchController controller) {
+        return SearchBar(
+          controller: controller,
+          padding: const WidgetStatePropertyAll<EdgeInsets>(
+            EdgeInsets.symmetric(horizontal: 16.0),
+          ),
+          onTap: () => controller.openView(),
+          onChanged: (_) => controller.openView(),
+          leading: const Icon(Icons.search),
+          hintText: viewModel.selectedLocation?.name ?? 'Buscar ciudad costera...',
+        );
+      },
+      suggestionsBuilder: (BuildContext context, SearchController controller) {
+        final String keyword = controller.value.text.toLowerCase();
+        
+        final Iterable<Location> options = viewModel.availableLocations.where((Location loc) {
+          return loc.name.toLowerCase().contains(keyword);
+        });
+        
+        return options.map((Location loc) {
+          return ListTile(
+            title: Text(loc.name),
+            leading: const Icon(Icons.location_on_outlined),
+            onTap: () {
+              viewModel.selectLocation(loc);
+              controller.closeView(loc.name);
+              FocusScope.of(context).unfocus();
+            },
+          );
+        });
+      },
     );
   }
 

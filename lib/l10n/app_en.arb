@@ -36,5 +36,6 @@
   "sendResetLinkButton": "Send Reset Link",
   "fullNameLabel": "Full Name",
   "alreadyHaveAccount": "Already have an account?",
-  "nameRequiredError": "Please enter your name"
+  "nameRequiredError": "Please enter your name",
+  "guestLoginAction": "Continue as Guest"
 }

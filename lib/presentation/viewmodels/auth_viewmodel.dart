@@ -68,9 +68,14 @@ class AuthViewModel extends ChangeNotifier {
   bool get isAuthenticated => _status == AuthStatus.authenticated;
 
   StreamSubscription<bool>? _authSubscription;
+  bool _isGuest = false;
+  bool get isGuest => _isGuest;
 
   void _init() {
     _authSubscription = _getAuthStateUseCase().listen((isAuthenticated) {
+      if (_isGuest && !isAuthenticated) {
+        return;
+      }
       _status = isAuthenticated ? AuthStatus.authenticated : AuthStatus.unauthenticated;
       notifyListeners();
     });
@@ -95,6 +100,13 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void signInAsGuest() {
+    _isGuest = true;
+    _status = AuthStatus.authenticated;
+    _errorMessage = null;
+    notifyListeners();
+  }
+
   Future<void> signUp(String email, String password, {String? displayName}) async {
     _status = AuthStatus.loading;
     _errorMessage = null;
@@ -115,6 +127,7 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
+    _isGuest = false;
     await _signOutUseCase();
     _status = AuthStatus.unauthenticated;
     notifyListeners();

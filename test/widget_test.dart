@@ -6,14 +6,13 @@ import 'package:mocktail/mocktail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'package:tabla_mareas/presentation/viewmodel/random_number_viewmodel.dart';
-import 'package:tabla_mareas/presentation/viewmodel/theme_viewmodel.dart';
-import 'package:tabla_mareas/presentation/view/random_number_screen.dart';
+import 'package:tabla_mareas/presentation/viewmodels/home_viewmodel.dart';
+import 'package:tabla_mareas/presentation/viewmodels/theme_viewmodel.dart';
+import 'package:tabla_mareas/presentation/views/home_screen.dart';
 import 'package:tabla_mareas/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
 class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
 
 void main() {
@@ -23,45 +22,41 @@ void main() {
     await di.init(AppConfig.dev);
     di.sl.allowReassignment = true;
     di.sl.registerLazySingleton<FirebaseAuth>(() => MockFirebaseAuth());
-    di.sl.registerLazySingleton<FirebaseFirestore>(
-      () => MockFirebaseFirestore(),
-    );
+    di.sl.registerLazySingleton<FirebaseFirestore>(() => MockFirebaseFirestore());
   });
 
-  testWidgets('RandomNumberScreen UI test with Localization', (
-    WidgetTester tester,
-  ) async {
+  testWidgets('HomeScreen UI test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => di.sl<RandomNumberViewModel>()),
+          ChangeNotifierProvider(create: (_) => di.sl<HomeViewModel>()),
           ChangeNotifierProvider(create: (_) => di.sl<ThemeViewModel>()),
         ],
-        child: MaterialApp(
-          localizationsDelegates: const [
+        child: const MaterialApp(
+          localizationsDelegates: [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [Locale('en'), Locale('es')],
-          home: const RandomNumberScreen(),
+          supportedLocales: [Locale('en'), Locale('es')],
+          home: HomeScreen(),
         ),
       ),
     );
 
-    // Wait for everything to load (including fonts, localization, etc)
+    // Wait for the Future.microtask and animations to settle
     await tester.pumpAndSettle();
 
-    // Verify that our app bar has the correct title from English localization.
-    expect(find.text('Flutter Premium Template'), findsOneWidget);
+    // Verify that our app bar has the correct title
+    expect(find.text('Tabla de Mareas'), findsOneWidget);
 
-    // Verify that the initial placeholder exists.
-    expect(find.text('Current Value'), findsOneWidget);
-    expect(find.text('--'), findsOneWidget);
+    // Verify the location selector is loaded with "Cádiz"
+    expect(find.text('Cádiz'), findsWidgets);
 
-    // Verify the action button exists.
-    expect(find.text('Generate Number'), findsOneWidget);
+    // Verify that TideCardWidget is displayed by finding its "Pleamar" or "Bajamar" texts
+    expect(find.text('Pleamar'), findsWidgets);
+    expect(find.text('Bajamar'), findsWidgets);
   });
 }
